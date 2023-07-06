@@ -1,17 +1,3 @@
-# Welcome to MkDocs
+# Bem vindo a documentação do trabalho sobre Cluster Beowulf - MATA58
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
-
-## Commands
-
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
-
-## Project layout
-
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+Nessa documentação irei te ensinar como você pode realizar atividades em um cluster beowulf de maneira mais "automatizada" através de um script em bash.
