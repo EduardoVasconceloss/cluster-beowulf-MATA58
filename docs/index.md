@@ -78,12 +78,19 @@ git clone https://github.com/EduardoVasconceloss/cluster-beowulf-MATA58.git
 ## Funcionalidades do cluster.sh
 
 O nosso cluster tem 7 funcionalidades, sendo elas:
+
 - mostrar: função que executa o comando "ls"
+  
 - copiar: função que executa o comando "cp"
+
 - mover: função que executa o comando "mv"
+  
 - definir_permissoes: função que executa o comando "chmod"
+  
 - criar_usuario: função que executa o comando "useradd"
+  
 - criar_grupo: função que executa o comando "groupadd"
+  
 - deletar: função que executa o comando "rm"
 
 ## Executando o nosso cluster.sh
