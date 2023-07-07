@@ -103,36 +103,43 @@ Obs: O comando só será executado em um node caso seja executado nos dois. Se u
 Ao executar o cluster, irá aparecer uma linha com a informação "Digite um comando: ", agora você tem sete opções de comandos para executar.
 
 - mostrar: Para executar a funcionalidade "mostrar", rode um comando com essa estrutura:
+
     ```bash
     mostrar /caminho/para/o/arquivo
     ```
     
 - copiar: Para executar a funcionalidade "copiar", rode um comando com essa estrutura:
+
     ```bash
     copiar /caminho/de/origem/para/o/arquivo/ /caminho/de/destino/para/o/arquivo
     ```
     
 - mover: Para executar a funcionalidade "mover", rode um comando com essa estrutura:
+
     ```bash
     mover /caminho/de/origem/para/o/arquivo/ /caminho/de/destino/para/o/arquivo
     ```
     
 - definir_permissoes: Para executar a funcionalidade "definir_permissoes", rode um comando com essa estrutura:
+
     ```bash
     definir_permissoes chmod +x /caminho/para/o/arquivo
     ```
     
 - criar_usuario: Para executar a funcionalidade "criar_usuario", rode um comando com essa estrutura:
+
     ```bash
     criar_usuario seu_nome
     ```
     
 - criar_grupo: Para executar a funcionalidade "criar_grupo", rode um comando com essa estrutura:
+
     ```bash
     criar_grupo seu_grupo
     ```
     
 - deletar: Para executar a funcionalidade "deletar", rode um comando com essa estrutura:
+
     ```bash
     deletar /caminho/para/o/arquivo
     ```
