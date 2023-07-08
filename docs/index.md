@@ -31,6 +31,7 @@ nano /etc/ssh/sshd_config
 # Altere a linha que contém "PermitRootLogin", ela deve ficar desse jeito:
 PermitRootLogin yes
 ```
+
 Para aplicar as alterações feitas, reinicie sua máquina, você pode usar o comando "sudo systemctl reboot"
 
 Para a conexão do cluster funcionar, precisamos da chave SSH. Somente assim as máquinas poderão comunicar-se entre si com segurança e agilidade.
@@ -39,6 +40,7 @@ Execute o seguinte comando nos dois nodes para gerar a chave SSH:
 ssh-keygen
 # Agora é só dar enter até cansar
 ```
+
 Após isso, vamos criar um arquivo de configuração ssh nos dois nodes para automatizar a "passagem" das chaves SSH de um node para o outro
 Execute esse comando:
 ```bash
@@ -75,6 +77,7 @@ Baixe o arquivo "cluster.sh" que pode ser encontrado no repositório desse traba
 sudo apt install git
 git clone https://github.com/EduardoVasconceloss/cluster-beowulf-MATA58.git
 ```
+
 ## Funcionalidades do cluster.sh
 
 O nosso cluster tem 7 funcionalidades, sendo elas:
@@ -119,18 +122,24 @@ Ao executar o cluster, irá aparecer uma linha com a informação "Digite um com
 
     ```
     copiar /caminho/de/origem/para/o/arquivo/ /caminho/de/destino/para/o/arquivo
+    
+    # Você também pode mover pastas
+    mover -r /caminho/de/origem/para/a/pasta/ /caminho/de/destino/para/a/pasta/
     ```
     
 - mover: Para executar a funcionalidade "mover", rode um comando com essa estrutura:
 
     ```
     mover /caminho/de/origem/para/o/arquivo/ /caminho/de/destino/para/o/arquivo
+
+    # Você também pode mover pastas
+    mover -r /caminho/de/origem/para/a/pasta/ /caminho/de/destino/para/a/pasta/
     ```
     
 - definir_permissoes: Para executar a funcionalidade "definir_permissoes", rode um comando com essa estrutura:
 
     ```
-    definir_permissoes chmod +x /caminho/para/o/arquivo
+    definir_permissoes +x /caminho/para/o/arquivo
     ```
     
 - criar_usuario: Para executar a funcionalidade "criar_usuario", rode um comando com essa estrutura:
