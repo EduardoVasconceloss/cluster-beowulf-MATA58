@@ -181,20 +181,20 @@ function criar_grupo {
   fi
 }
 
-# Função para deletar um arquivo nos dois nodes
+# Função para deletar um arquivo ou diretório nos dois nodes
 function deletar {
   local item="$1"
 
-  # Checa se o arquivo existe nos dois nodes
+  # Checa se o arquivo ou diretório existe nos dois nodes
   local exists_node1=$(ssh node1 "[ -e \"$item\" ] && echo 'true'")
   local exists_node2=$(ssh node2 "[ -e \"$item\" ] && echo 'true'")
 
   if [[ -n $exists_node1 && -n $exists_node2 ]]; then
     echo "Deletando $item no Node1..."
-    ssh node1 "rm \"$item\""
+    ssh node1 "rm -r \"$item\""
 
     echo "Deletando $item no Node2..."
-    ssh node2 "rm \"$item\""
+    ssh node2 "rm -r \"$item\""
   elif [[ -n $exists_node1 ]]; then
     echo "Error: $item não encontrado no Node2."
   elif [[ -n $exists_node2 ]]; then
