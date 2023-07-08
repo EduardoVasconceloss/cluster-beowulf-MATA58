@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Function to show the list of files in a directory on both nodes
+# Função para mostrar uma lista de arquivos e diretórios em um diretório nos dois nodes
 function mostrar {
   if [ $# -eq 0 ]; then
     echo "Por favor, forneça o nome do diretório."
@@ -16,6 +16,7 @@ function mostrar {
     echo "Listando arquivos no Node1:"
     ssh node1 "ls $directory"
     directory_exists=true
+  # Checa se o arquivo ou diretório existe
   else
     echo "Diretório "$directory" não existe em Node1."
   fi
@@ -33,7 +34,7 @@ function mostrar {
   fi
 }
 
-# Function to execute a command on both nodes
+# Função para executar um comando nos dois nodes
 function executar_comando {
   local command="$1"
   local args="$2"
@@ -45,51 +46,92 @@ function executar_comando {
   ssh node2 "$command" "$args"
 }
 
-# Function to copy files or directories between nodes
+# Função para copiar arquivos ou diretórios nos dois nodes
 function copiar {
   local source="$1"
   local destination="$2"
 
+  # Checa se o arquivo ou diretório existe
   if [[ ! -e $source ]]; then
     echo "Error: Arquivo ou diretório '$source' não existe."
     return
   fi
 
-  executar_comando "cp" "$source $destination"
+  local exists_node1=$(ssh node1 "[ -e \"$source\" ] && echo 'true'")
+  local exists_node2=$(ssh node2 "[ -e \"$source\" ] && echo 'true'")
+
+  if [[ -n $exists_node1 && -n $exists_node2 ]]; then
+    executar_comando "cp" "$source $destination"
+  elif [[ -z $exists_node1 && -z $exists_node2 ]]; then
+    echo "Error: Arquivo ou diretório '$source' não existe nos dois nodes."
+  elif [[ -z $exists_node1 ]]; then
+    echo "Error: Arquivo ou diretório '$source' não existe em Node1."
+  else
+    echo "Error: Arquivo ou diretório '$source' não existe em Node2."
+  fi
 }
 
-# Function to move or rename files or directories on both nodes
+# Função para mover ou renomear arquivos ou diretórios nos dois nodes
 function mover {
-  local source="$1"
-  local destination="$2"
+  local options=""
+  local source=""
+  local destination=""
 
-  if [[ ! -e $source ]]; then
-    echo "Error: Arquivo ou diretório '$source' não existe."
-    return
+  if [[ $1 == "-r" ]]; then
+    options="-r"
+    source="$2"
+    destination="$3"
+    echo "Executando o comando 'mv' no Node1..."
+    echo "Executando o comando 'mv' no Node2..."
+    ssh node1 "cp -r" "$source $destination"
+    ssh node2 "cp -r" "$source $destination"
+    ssh node1 "rm -r" "$source"
+    ssh node2 "rm -r" "$source"
+  else
+    source="$1"
+    destination="$2"
+
+    # Checa se o arquivo ou diretório existe
+    if [[ ! -e $source ]]; then
+      echo "Error: Arquivo ou diretório '$source' não existe."
+      return
+    fi
+
+    local exists_node1=$(ssh node1 "[ -e \"$source\" ] && echo 'true'")
+    local exists_node2=$(ssh node2 "[ -e \"$source\" ] && echo 'true'")
+
+    if [[ -n $exists_node1 && -n $exists_node2 ]]; then
+      executar_comando "mv" "$source $destination"
+    elif [[ -z $exists_node1 && -z $exists_node2 ]]; then
+      echo "Error: Arquivo ou diretório '$source' não existe nos dois nodes."
+    elif [[ -z $exists_node1 ]]; then
+      echo "Error: Arquivo ou diretório '$source' não existe em Node1."
+    else
+      echo "Error: Arquivo ou diretório '$source' não existe em Node2."
+    fi
   fi
-
-  executar_comando "mv" "$source $destination"
 }
 
-# Function to define permissions for a user or group on both nodes
+# Funções para definir permissões de um arquivo nos dois nodes
 function definir_permissoes {
-  local command="$1"
-  local permissions="$2"
-  local file="$3"
+  local permissions="$1"
+  local file="$2"
 
+  # Checa se o arquivo ou diretório existe
   if [[ ! -e "$file" ]]; then
-    echo "Error: Arquivo ou diretório '$file' não existe."
+    echo "Error: File or directory '$file' does not exist."
     return
   fi
 
-  executar_comando "$command" "$permissions \"$file\""
+  local command="chmod $permissions \"$file\""
+  executar_comando "$command"
 }
 
-# Function to create a new user on both nodes
+# Função para criar um usuário nos dois nodes
 function criar_usuario {
   local username="$1"
 
-  # Check if the user already exists on both nodes
+  # Checa se o usuário já existe nos dois nodes
   local exists_node1=$(ssh node1 "id -u $username > /dev/null 2>&1 && echo 'true'")
   local exists_node2=$(ssh node2 "id -u $username > /dev/null 2>&1 && echo 'true'")
 
@@ -112,11 +154,11 @@ function criar_usuario {
   fi
 }
 
-# Function to create a new group on both nodes
+# Função para criar um grupo nos dois nodes
 function criar_grupo {
   local groupname="$1"
 
-  # Check if the group already exists on both nodes
+  # Checa se o grupo já existe nos dois nodes
   local exists_node1=$(ssh node1 "getent group $groupname > /dev/null && echo 'true'")
   local exists_node2=$(ssh node2 "getent group $groupname > /dev/null && echo 'true'")
 
@@ -139,11 +181,11 @@ function criar_grupo {
   fi
 }
 
-# Function to delete a file or directory on both nodes
+# Função para deletar um arquivo nos dois nodes
 function deletar {
   local item="$1"
 
-  # Check if the file exists on both nodes
+  # Checa se o arquivo existe nos dois nodes
   local exists_node1=$(ssh node1 "[ -e \"$item\" ] && echo 'true'")
   local exists_node2=$(ssh node2 "[ -e \"$item\" ] && echo 'true'")
 
@@ -162,7 +204,7 @@ function deletar {
   fi
 }
 
-# Main script
+# Script
 read -p "Digite um comando: " command args
 
 case $command in
