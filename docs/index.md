@@ -160,6 +160,24 @@ Ao executar o cluster, irá aparecer uma linha com a informação "Digite um com
     deletar /caminho/para/o/arquivo
     ```
 
+## Relatório do trabalho    
+
+- Definição do escopo do projeto e atribuição de responsabilidades - Prazo: 2 dias (08/06/2023 - 10/06/2023) (Landerson, Ryan, Eduardo, Wellington)
+
+- Desenvolvimento do código-fonte - Prazo: 20 dias (08/07/2023 - 28/07/2023) (Landerson, Ryan, Eduardo, Wellington)
+
+- Criação do manual de uso - Prazo: 2 dias (25/06/2023 - 27/06/2023) (Wellington)
+
+- Revisão do código e realização de testes - Prazo: 2 dias (28/06/2023 - 25/06/2023) (Eduardo e Wellington)
+
+- Criação das instruções de instalação - Prazo: 2 dias (28/06/2023 - 30/06/2023) (Ryan)
+
+- Criação de vídeo explicativo de até 10 minutos - Prazo: 4 dias (01/07/2023 - 04/07/2023) (Landerson)
+
+- Revisão e aprovação do vídeo - Prazo: 3 dias (05/07/2023 - 09/07/2023) (Eduardo)
+
+- Revisão final de todo o projeto - Prazo: 3 dias (6/07/2023 - 09/07/2023) (Landerson, Ryan, Eduardo, Wellington)
+
 ## Integrantes do grupo:
 - 222116281, Landerson E Miranda
 - 222116288, Wellington Miguel de Jesus Silva 
